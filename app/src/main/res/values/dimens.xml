@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="grid_image_height">130dp</dimen>
+    <dimen name="grid_image_width">130dp</dimen>
+    <dimen name="details_image_height">130dp</dimen>
+    <dimen name="details_image_width">130dp</dimen>
+    <dimen name="details_fragment_list_item_height">130dp</dimen>
+    <dimen name="activities_card_image_height">160dp</dimen>
+    <dimen name="base_padding">16dp</dimen>
+    <dimen name="medium_padding">8dp</dimen>
+    <dimen name="small_padding">4dp</dimen>
+    <dimen name="base_margin">16dp</dimen>
+    <dimen name="medium_margin">8dp</dimen>
+    <dimen name="small_margin">4dp</dimen>
+    <dimen name="subcategory_grid_item">150dp</dimen>
+    <dimen name="subcategory_grid_verticalSpacing">0dp</dimen>
+    <dimen name="subcategory_grid_HorizontalSpacing">0dp</dimen>
+    <dimen name="subcategory_grid_columnWidth">150dp</dimen>
+    <dimen name="cardTitleTextSize">18sp</dimen>
+    <dimen name="cardCornerRadius">1dp</dimen>
+    <dimen name="cardElevation">2dp</dimen>
+    <dimen name="cardMaxElevation">4dp</dimen>
+</resources>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Cinci Tour Guide</string>
+    <string name="main_category_things_to_do">Things To Do</string>
+    <string name="main_category_landmarks">Landmarks To See</string>
+    <string name="main_category_eat">Eat &amp; Drink</string>
+    <string name="main_category_city_history">City History</string>
+    <string name="seeMore">See More</string>
+    <string name="rates_header"><u>Rates:</u></string>
+    <string name="hours_header"><u>Hours:</u></string>
+
+
+    <string name="testing_string">Featuring Sunlite Water Adventure, classic rides, live shows, mini golf and more, Coney Island has all the makings of a full day of fun for the whole family&#8230;</string>
+</resources>

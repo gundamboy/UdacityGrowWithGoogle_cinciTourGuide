@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/activity_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/base_margin"
+        card_view:cardBackgroundColor="@colors/colorCardBackground"
+        card_view:cardCornerRadius="@dimen/cardCornerRadius"
+        card_view:cardElevation="@dimen/cardElevation"
+        card_view:cardMaxElevation="@dimen/cardMaxElevation">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/activity_card_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activities_card_image_height"
+                android:scaleType="centerCrop"
+                android:src="@drawable/todo_coney_island" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/small_padding"
+                android:paddingLeft="@dimen/base_padding"
+                android:paddingRight="@dimen/base_padding">
+
+                <TextView
+                    android:id="@+id/activity_card_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:text="Coney Island"
+                    android:textColor="@color/colorCardHeaders"
+                    android:textSize="@dimen/cardTitleTextSize" />
+
+                <TextView
+                    android:id="@+id/activity_card_teaser_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/testing_string"
+                    android:textColor="#555" />
+            </LinearLayout>
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/activity_card_button"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/seeMore"-->
+                    <!--android:theme="@style/PrimaryFlatButton" />-->
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
