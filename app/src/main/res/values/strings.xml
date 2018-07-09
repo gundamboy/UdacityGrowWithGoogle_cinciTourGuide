@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Cinci Tour Guide</string>
+    <string name="app_name">Cincinnati Tour Guide</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
     <string name="main_category_things_to_do">Things To Do</string>
     <string name="main_category_landmarks">Landmarks To See</string>
     <string name="main_category_eat">Eat &amp; Drink</string>

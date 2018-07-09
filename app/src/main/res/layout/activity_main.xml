@@ -1,66 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     tools:context="com.wickedsword.retar.cincitourguide.MainActivity">
 
-    <ImageView
-        android:id="@+id/cincinnati"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/activities_card_image_height"
-        android:scaleType="centerCrop"
-        android:src="@drawable/cincinnati" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+id/things_to_do"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/main_category_things_to_do"
-            android:gravity="center"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+id/landmarks"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/main_category_landmarks"
-            android:gravity="center"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+id/eat_drink"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/main_category_eat"
-            android:gravity="center"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        android:layout_weight="1">
-    <TextView
-        android:id="@+id/history"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="@string/main_category_city_history"
-        android:gravity="center"/>
-    </RelativeLayout>
+        android:orientation="vertical" >
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/cincinnati"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activities_card_image_height"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cincinnati" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/things_to_do"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/main_category_things_to_do"
+                android:gravity="center"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/landmarks"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/main_category_landmarks"
+                android:gravity="center"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/eat_drink"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/main_category_eat"
+                android:gravity="center"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/history"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/main_category_city_history"
+                android:gravity="center"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/navigation_drawer" />
+
+</android.support.v4.widget.DrawerLayout>

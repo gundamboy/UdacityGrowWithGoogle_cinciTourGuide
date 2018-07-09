@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item android:id="@+id/things_to_do_drawer" android:title="@string/main_category_things_to_do" />
+    <item android:id="@+id/landmarks_drawer" android:title="@string/main_category_landmarks" />
+    <item android:id="@+id/food_drawer" android:title="@string/main_category_eat" />
+    <item android:id="@+id/city_history_drawer" android:title="@string/main_category_city_history" />
+</menu>

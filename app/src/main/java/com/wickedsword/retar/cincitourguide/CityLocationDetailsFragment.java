@@ -1,6 +1,8 @@
 package com.wickedsword.retar.cincitourguide;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Layout;
@@ -24,8 +26,6 @@ public class CityLocationDetailsFragment extends Fragment {
     private static final String INDEX = "index";
     private static final String SUBCATEGORY_ID = "category_id";
     private static final String PARENT_CATEGORY_NAME = "parent_category";
-    private static final String CURRENT_CHOICE = "choice";
-    private static final String ACTIVITY_ID = "activity_id";
     private static final String IMAGE_RESOURCE_ID = "image_resource_id";
     private static final String ACTIVITY_NAME = "activity_name";
     private static final String ACTIVITY_IMAGE = "activity_image";
@@ -38,13 +38,7 @@ public class CityLocationDetailsFragment extends Fragment {
 
 
     // we need some variables and setters to display info from the clicked list items
-    private String parent_category;
-    private int subcategory_id;
-    private int activity_id;
     private int imageResourceId;
-    private String parentCategoryName;
-    private String imageName;
-    private String city_activity_image_name;
     private String activityName;
     private String address;
     private String phone;
@@ -73,11 +67,12 @@ public class CityLocationDetailsFragment extends Fragment {
     }
 
     public int getShownIndex() {
-        return getArguments().getInt(INDEX, 0);
+        return getArguments().getInt(INDEX);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         if (container == null) {
             // We have different layouts, and in one of them this
             // fragment's containing frame doesn't exist. The fragment
@@ -91,11 +86,8 @@ public class CityLocationDetailsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_city_location_details, container, false);
 
-        if(getArguments() != null) {
+        if (getArguments() != null) {
 
-            subcategory_id = getArguments().getInt(SUBCATEGORY_ID);
-            parentCategoryName = getArguments().getString(PARENT_CATEGORY_NAME);
-            imageName = getArguments().getString(ACTIVITY_IMAGE);
             activityName = getArguments().getString(ACTIVITY_NAME);
             imageResourceId = getArguments().getInt(IMAGE_RESOURCE_ID);
             address = getArguments().getString(ADDRESS);
@@ -104,6 +96,11 @@ public class CityLocationDetailsFragment extends Fragment {
             description = getArguments().getString(DESCRIPTION);
             rates = getArguments().getString(RATES);
             hours = getArguments().getString(HOURS);
+
+
+            if(rates == null || rates.isEmpty()) {
+                Log.v("DETAILSVIEW", "rates was empty");
+            }
 
             ImageView activityImage = view.findViewById(R.id.city_activity_image);
             //int imageResourceId = getActivity().getResources().getIdentifier(imageName, "drawable", getActivity().getPackageName());
@@ -130,9 +127,34 @@ public class CityLocationDetailsFragment extends Fragment {
             TextView activity_hours = view.findViewById(R.id.hours);
             activity_hours.setText(hours);
 
+            // set up click listeners for implicit intents for phone and maps
+            activity_phone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String cleanPhone = phone.replace("-", "");
+                    Uri phone_number = Uri.parse("tel:" + cleanPhone);
+                    Intent callIntent = new Intent(Intent.ACTION_DIAL, phone_number);
+                    startActivity(callIntent);
+                    ;
+                }
+            });
+
+            activity_address.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri mapSearchString = Uri.parse("geo:0,0?q=" + address);
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapSearchString);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+
+                    if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivity(mapIntent);
+                    }
+                }
+            });
+
+        } else {
+            Log.v("CityLocDetailsFrag", "getArguments() is null");
         }
-
-
         return view;
     }
 

@@ -40,15 +40,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/small_margin"
                     android:text="Coney Island"
-                    android:textColor="@color/colorCardHeaders"
-                    android:textSize="@dimen/cardTitleTextSize" />
+                    android:textAppearance="@style/CardHeaders" />
 
                 <TextView
                     android:id="@+id/activity_card_teaser_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/small_margin"
                     android:text="@string/testing_string"
-                    android:textColor="#555" />
+                    android:textAppearance="@style/CardDescriptions" />
+
+                <TextView
+                    android:id="@+id/activity_see_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:text="@string/seeMore"
+                    android:textAppearance="@style/SeeMore" />
             </LinearLayout>
 
             <!--<LinearLayout-->

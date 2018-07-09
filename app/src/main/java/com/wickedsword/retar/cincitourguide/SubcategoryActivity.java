@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class SubcategoryActivity extends AppCompatActivity {
     private JSONArray category_jArray;
     private static final String CATEGORY = "category";
-    private static final String PARENT_CATEGORY = "parentCategory";
     private String parentCategory;
 
     @Override
@@ -88,5 +87,17 @@ public class SubcategoryActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        parentCategory = savedInstanceState.getString(CATEGORY);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(CATEGORY, parentCategory);
     }
 }
