@@ -78,6 +78,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if(id == R.id.things_to_do_drawer) {
+            thingsToDoIntent();
+        } else if(id == R.id.landmarks_drawer) {
+            landmarksIntent();
+        } else if(id == R.id.food_drawer) {
+            foodIntent();
+        } else if(id == R.id.city_history_drawer) {
+            cityHistoryIntent();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
 
         return true;
     }
@@ -131,7 +143,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void cityHistoryIntent() {
-        Toast toast = Toast.makeText(getApplicationContext(), "city history", Toast.LENGTH_SHORT);
-        toast.show();
+        // set up the intent
+        Intent cityHistoryIntent = new Intent(MainActivity.this, CityHistoryActivity.class);
+
+        // Start the new activity
+        startActivity(cityHistoryIntent);
     }
 }
