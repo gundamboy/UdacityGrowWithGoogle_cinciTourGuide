@@ -12,18 +12,6 @@ import java.util.ArrayList;
 
 
 public class CityActivityListAdapter extends ArrayAdapter<CityLocation> {
-    int activityId;
-    int imageId;
-    String activityName;
-    String activityImage;
-    String activityDescription;
-    String activityWebsite;
-    String activityPhoneNumber;
-    String activityAddressStreet;
-    String activityAddressCityStateZip;
-    String activityAddressMapsQuery;
-    String activityRates;
-    String activityHours;
 
     // constructor
     public CityActivityListAdapter(Activity context, ArrayList<CityLocation> locations) {
@@ -51,6 +39,7 @@ public class CityActivityListAdapter extends ArrayAdapter<CityLocation> {
 
         // teaser text
         TextView teaserText = listView.findViewById(R.id.activity_card_teaser_text);
+        teaserText.setText(currentLocation.getmActivityTeaserText());
 
         return listView;
     }

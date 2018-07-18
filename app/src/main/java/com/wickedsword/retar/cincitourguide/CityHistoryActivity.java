@@ -8,6 +8,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class CityHistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String CATEGORY = "category";
@@ -19,6 +25,11 @@ public class CityHistoryActivity extends AppCompatActivity implements Navigation
     private ActionBarDrawerToggle mToggle;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavView;
+
+    private ExpandableListView listView;
+    private ExpandableListAdapter adapter;
+    private List<String> listHistoryHeader;
+    private HashMap<String, List<String>> listHash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +45,58 @@ public class CityHistoryActivity extends AppCompatActivity implements Navigation
 
         mNavView = (NavigationView) findViewById(R.id.nav_view);
         mNavView.setNavigationItemSelectedListener(CityHistoryActivity.this);
+
+        listView = (ExpandableListView) findViewById(R.id.historyList);
+        initData();
+        adapter = new HistoryExpandableListAdapter(this, listHistoryHeader, listHash);
+        listView.setAdapter(adapter);
+    }
+
+    private void initData() {
+        listHistoryHeader = new ArrayList<>();
+        listHash = new HashMap<>();
+
+        listHistoryHeader.add(getResources().getString(R.string.history_header_early_history));
+        listHistoryHeader.add(getResources().getString(R.string.history_header_civil_war));
+        listHistoryHeader.add(getResources().getString(R.string.history_header_underground_railroad));
+        listHistoryHeader.add(getResources().getString(R.string.history_header_sports));
+        listHistoryHeader.add(getResources().getString(R.string.history_header_fountain));
+        listHistoryHeader.add(getResources().getString(R.string.history_header_disasters));
+
+        List<String> early_history = new ArrayList<>();
+        early_history.add(getResources().getString(R.string.history_early_history));
+
+        List<String> civil_war = new ArrayList<>();
+        civil_war.add(getResources().getString(R.string.history_civil_war));
+
+        List<String> railroad = new ArrayList<>();
+        railroad.add(getResources().getString(R.string.history_underground_railroad));
+
+        List<String> sports = new ArrayList<>();
+        sports.add(getResources().getString(R.string.history_sports));
+
+        List<String> fountain = new ArrayList<>();
+        fountain.add(getResources().getString(R.string.history_fountain));
+
+        List<String> disasters = new ArrayList<>();
+        disasters.add(getResources().getString(R.string.history_disasters));
+
+        listHash.put(listHistoryHeader.get(0), early_history);
+        listHash.put(listHistoryHeader.get(1), civil_war);
+        listHash.put(listHistoryHeader.get(2), railroad);
+        listHash.put(listHistoryHeader.get(3), sports);
+        listHash.put(listHistoryHeader.get(4), fountain);
+        listHash.put(listHistoryHeader.get(5), disasters);
     }
 
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.things_to_do_drawer) {
-            thingsToDoIntent();
+
         } else if(id == R.id.landmarks_drawer) {
-            landmarksIntent();
+
         } else if(id == R.id.food_drawer) {
-            foodIntent();
+
         } else if(id == R.id.city_history_drawer) {
             return false;
         }
@@ -70,35 +123,5 @@ public class CityHistoryActivity extends AppCompatActivity implements Navigation
         } else {
             super.onBackPressed();
         }
-    }
-
-    public void thingsToDoIntent() {
-        // set up the intent
-        Intent thingsToDoIntent = new Intent(CityHistoryActivity.this, SubcategoryActivity.class);
-        thingsToDoIntent.putExtra(CATEGORY, THINGS_TO_DO_CATEGORY);
-
-        // Start the new activity
-        startActivity(thingsToDoIntent);
-    }
-
-    public void landmarksIntent() {
-        // set up the intent
-        Intent activitiesIntent = new Intent(CityHistoryActivity.this, CityLocationActivitiesActivity.class);
-
-        // pass the subcategory ID to the next Activity so we can get its activities from the json
-        activitiesIntent.putExtra(SUBCATEGORY_ID, 1);
-        activitiesIntent.putExtra(PARENT_CATEGORY_NAME, LANDMARKS);
-
-        // start the activity
-        startActivity(activitiesIntent);
-    }
-
-    public void foodIntent() {
-        // set up the intent
-        Intent foodIntent = new Intent(CityHistoryActivity.this, SubcategoryActivity.class);
-        foodIntent.putExtra(CATEGORY, FOOD_CATEGORY);
-
-        // Start the new activity
-        startActivity(foodIntent);
     }
 }

@@ -18,31 +18,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SubcategoryActivity"
-            android:label="@string/main_category_things_to_do"
-            android:parentActivityName=".SubcategoryActivity">
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SubcategoryActivity"/>
-        </activity>
-        <activity
             android:name=".CityLocationActivitiesActivity"
             android:label="@string/main_category_things_to_do"
-            android:parentActivityName=".SubcategoryActivity">
+            android:parentActivityName=".MainActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SubcategoryActivity"/>
+                android:value=".MainActivity"/>
         </activity>
         <activity
             android:name=".CityDetailsActivity"
             android:label="@string/main_category_things_to_do"
-            android:parentActivityName=".SubcategoryActivity">
+            android:parentActivityName=".CityLocationActivitiesActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SubcategoryActivity"/>
+                android:value=".MainActivity"/>
         </activity>
         <activity
             android:name=".CityHistoryActivity"

@@ -1,7 +1,5 @@
 package com.wickedsword.retar.cincitourguide;
 
-
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
@@ -13,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +27,7 @@ import java.util.ArrayList;
 public class CityLocationActivitiesFragment extends ListFragment {
     private static final String SUBCATEGORY_ID = "category_id";
     private static final String PARENT_CATEGORY_NAME = "parent_category";
-    private static final String CURRENT_CHOICE = "choice";
+    private static final String CURRENT_CHOICE = "curChoice";
     private static final String INDEX = "index";
     private static final String ACTIVITY_ID = "activity_id";
     private static final String IMAGE_RESOURCE_ID = "image_resource_id";
@@ -47,7 +46,6 @@ public class CityLocationActivitiesFragment extends ListFragment {
     // we need to pass some stuff to this details fragment to get the right info
     private int subcategoryId;
     private String parentCategoryName;
-    private JSONArray category_jArray;
     private ArrayList<CityLocation> locations= new ArrayList<CityLocation>();
 
     private int activityId;
@@ -60,12 +58,16 @@ public class CityLocationActivitiesFragment extends ListFragment {
     private String activityAddressMapsQuery;
     private String activityRates;
     private String activityHours;
-    private String activityAddressStreet;
-    private String activityAddressCityStateZip;
+
+    // this method listens for the onBackPressed() method.
+    // if that was used, and the results came back ok,
+    // set the variables to use the data from that intent
+    // otherwise, the extras bundle will be null and the app will crash.
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.v("CityLocActivityActFrag", "onActivityCreated");
 
         Bundle extras = getActivity().getIntent().getExtras();
 
@@ -86,6 +88,11 @@ public class CityLocationActivitiesFragment extends ListFragment {
         View detailsFrame = getActivity().findViewById(R.id.details);
         mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
+        if (savedInstanceState != null) {
+            // Restore last state for checked position.
+            mCurCheckPosition = savedInstanceState.getInt(CURRENT_CHOICE, 0);
+        }
+
         if (mDualPane) {
             // In dual-pane mode, the list view highlights the selected item.
             getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -96,17 +103,7 @@ public class CityLocationActivitiesFragment extends ListFragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(CURRENT_CHOICE, mCurCheckPosition);
-        outState.putInt(SUBCATEGORY_ID, subcategoryId);
-        outState.putString(PARENT_CATEGORY_NAME, parentCategoryName);
-    }
-
-    @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-
-        Log.v("CityLocActivitiesFrag", "item clicked. position: " + position);
         showDetails(position);
     }
 
@@ -128,9 +125,6 @@ public class CityLocationActivitiesFragment extends ListFragment {
         activityRates = locations.get(mCurCheckPosition).getmActivityRates();
         activityHours = locations.get(mCurCheckPosition).getmActivityHours();
 
-        Log.v("******************", "CityLocationActivitiesFragment showDetails of position: " + mCurCheckPosition);
-        Log.v("******************", "CityLocationActivitiesFragment array should be: " + locations.get(mCurCheckPosition));
-
         if (mDualPane) {
             // We can display everything in-place with fragments, so update
             // the list to highlight the selected item and show the data.
@@ -142,7 +136,6 @@ public class CityLocationActivitiesFragment extends ListFragment {
             if (details == null || details.getShownIndex() != mCurCheckPosition) {
                 // Make new fragment to show this selection.
                 details = CityLocationDetailsFragment.newInstance(mCurCheckPosition);
-                Log.v("******************", "CityLocationActivitiesFragment details is an instance with an index of: " + mCurCheckPosition);
 
                 FragmentManager fm = getFragmentManager();
 
@@ -161,19 +154,12 @@ public class CityLocationActivitiesFragment extends ListFragment {
                 fragBundle.putString(ADDRESS, activityAddressMapsQuery);
                 fragBundle.putString(RATES, activityRates);
                 fragBundle.putString(HOURS, activityHours);
-
                 details.setArguments(fragBundle);
 
                 // Execute a transaction, replacing any existing fragment
                 // with this one inside the frame.
                 FragmentTransaction ft = fm.beginTransaction();
-                if (index == 0) {
-                    Log.v("******************", "CityLocationActivitiesFragment replace details fragment");
-                    ft.replace(R.id.details, details);
-                } else {
-                    Log.v("******************", "CityLocationActivitiesFragment replace ??????");
-                    ft.replace(R.id.details, details);
-                }
+                ft.replace(R.id.details, details);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
             }
@@ -183,7 +169,8 @@ public class CityLocationActivitiesFragment extends ListFragment {
             Intent intent = new Intent();
             intent.setClass(getActivity(), CityDetailsActivity.class);
             intent.putExtra(INDEX, index);
-            intent.putExtra(PARENT_CATEGORY_NAME, subcategoryId);
+            intent.putExtra(PARENT_CATEGORY_NAME, parentCategoryName);
+            intent.putExtra(SUBCATEGORY_ID, subcategoryId);
             intent.putExtra(CURRENT_CHOICE, mCurCheckPosition);
             intent.putExtra(ACTIVITY_ID, activityId);
             intent.putExtra(IMAGE_RESOURCE_ID, imageResourceId);
@@ -224,10 +211,10 @@ public class CityLocationActivitiesFragment extends ListFragment {
             JSONObject obj = new JSONObject(json);
 
             // sets the category_jArray to be an array of all the objects under the subcategory_grid key in the json
-            category_jArray = obj.getJSONArray(parentCategoryName);
+            JSONArray category_jArray = obj.getJSONArray(parentCategoryName);
 
             // build the array of categories by looping through the json array
-            for(int i = 0; i<category_jArray.length(); i++) {
+            for(int i = 0; i< category_jArray.length(); i++) {
                 JSONObject inner_array = category_jArray.getJSONObject(i);
                 int current_category_id = inner_array.getInt("category_id");
 
@@ -242,11 +229,12 @@ public class CityLocationActivitiesFragment extends ListFragment {
                         activityId = inner_activity.getInt("activity_id");
                         activityName = inner_activity.getString("activity_name");
                         activityImage = inner_activity.getString("activity_thumbnail");
+                        String activityTeaserText = inner_activity.getString("activity_teaser_text");
                         activityDescription = inner_activity.getString("activity_description");
                         activityWebsite = inner_activity.getString("activity_website");
                         activityPhoneNumber = inner_activity.getString("activity_phone_number");
-                        activityAddressStreet = inner_activity.getString("address_street");
-                        activityAddressCityStateZip = inner_activity.getString("city_state_zip");
+                        String activityAddressStreet = inner_activity.getString("address_street");
+                        String activityAddressCityStateZip = inner_activity.getString("city_state_zip");
                         activityAddressMapsQuery = inner_activity.getString("address_directions_link");
                         activityRates = inner_activity.getString("activity_rates");
                         activityHours = inner_activity.getString("activity_hours");
@@ -255,7 +243,7 @@ public class CityLocationActivitiesFragment extends ListFragment {
                         imageResourceId = getActivity().getResources().getIdentifier(activityImage, "drawable", getActivity().getPackageName());
 
                         // add the information into a new CityLocation object
-                        locations.add(new CityLocation(activityId, activityName, imageResourceId, activityDescription, activityWebsite, activityPhoneNumber, activityAddressStreet, activityAddressCityStateZip, activityAddressMapsQuery, activityRates, activityHours));
+                        locations.add(new CityLocation(activityId, activityName, imageResourceId, activityTeaserText, activityDescription, activityWebsite, activityPhoneNumber, activityAddressStreet, activityAddressCityStateZip, activityAddressMapsQuery, activityRates, activityHours));
                     }
                 }
             }

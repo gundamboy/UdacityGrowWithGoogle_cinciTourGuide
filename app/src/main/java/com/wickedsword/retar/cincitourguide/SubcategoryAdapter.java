@@ -39,6 +39,7 @@ public class SubcategoryAdapter extends ArrayAdapter<Subcategory> {
         categoryName.setText(currentCategory.getCategoryName());
 
         //set an setOnClickListener for each gird item to go to the CityLocationActivitiesActivity activity. that's a whole of activities!
+        /*
         gridView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +54,7 @@ public class SubcategoryAdapter extends ArrayAdapter<Subcategory> {
                 getContext().startActivity(activitiesIntent);
             }
         });
+        */
 
         return gridView;
     }

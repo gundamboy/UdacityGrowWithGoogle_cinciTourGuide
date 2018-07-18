@@ -6,6 +6,7 @@ public class CityLocation {
     private int mActivityId;
     private String mActivityName;
     private int mActivityImageId;
+    private String mActivityTeaserText;
     private String mActivityDescription;
     private String mActivityWebsite;
     private String mActivityPhoneNumber;
@@ -15,10 +16,11 @@ public class CityLocation {
     private String mActivityRates;
     private String mActivityHours;
 
-    public CityLocation(int mActivityId, String mActivityName, int mActivityImageId, String mActivityDescription, String mActivityWebsite, String mActivityPhoneNumber, String mActivityStreet, String mActivityCityStateZip, String mActivityDirectionsString, String mActivityRates, String mActivityHours) {
+    public CityLocation(int mActivityId, String mActivityName, int mActivityImageId, String mActivityTeaserText, String mActivityDescription, String mActivityWebsite, String mActivityPhoneNumber, String mActivityStreet, String mActivityCityStateZip, String mActivityDirectionsString, String mActivityRates, String mActivityHours) {
         this.mActivityId = mActivityId;
         this.mActivityName = mActivityName;
         this.mActivityImageId = mActivityImageId;
+        this.mActivityTeaserText = mActivityTeaserText;
         this.mActivityDescription = mActivityDescription;
         this.mActivityWebsite = mActivityWebsite;
         this.mActivityPhoneNumber = mActivityPhoneNumber;
@@ -39,6 +41,10 @@ public class CityLocation {
 
     public int getmActivityImageId() {
         return mActivityImageId;
+    }
+
+    public String getmActivityTeaserText() {
+        return mActivityTeaserText;
     }
 
     public String getmActivityDescription() {

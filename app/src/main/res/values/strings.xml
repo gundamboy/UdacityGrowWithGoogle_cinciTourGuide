@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Cincinnati Tour Guide</string>
+    <string name="welcome_text">Welcome to Cincinnati, the Queen city.</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
     <string name="main_category_things_to_do">Things To Do</string>
@@ -9,6 +10,7 @@
     <string name="seeMore">See More</string>
     <string name="rates_header"><u>Rates:</u></string>
     <string name="hours_header"><u>Hours:</u></string>
+
     <string name="history_header_early_history">Early history</string>
     <string name="history_early_history">Cincinnati was founded in late December 1788 by Mathias Denman, Colonel Robert Patterson and Israel Ludlow. The original surveyor, John Filson, named it \"Losantiville\", from four terms, each of different language, before his death in October 1788. It means \"The city opposite the mouth of the (Licking) River\", \"ville\" is French for \"city\", \"anti\" is Greek for \"opposite\", \"os\" is Latin for \"mouth\", and \"L\" was all that was included of \"Licking River\".\n\nCincinnati began as three settlements between the Little Miami and Great Miami rivers on the north shore of the Ohio River. Columbia was on the Little Miami, North Bend on the Great Miami. Losantiville, the central settlement, was opposite the mouth of the Licking River.\n\nIn 1789 Fort Washington was built to protect the settlements in the Northwest Territory.\n\nIn 1790, Arthur St. Clair, the governor of the Northwest Territory, changed the name of the settlement to \"Cincinnati\" in honor of the Society of the Cincinnati, of which he was president. The society gets its name from Cincinnatus, the Roman general and dictator, who saved the city of Rome from destruction and then quietly retired to his farm. The society honored the ideal of return to civilian life by military officers following the Revolution rather than imposing military rule. To this day, Cincinnati in particular, and Ohio in general, is home to a disproportionately large number of descendants of Revolutionary War soldiers who were granted lands in the state. Cincinnati\'s connection with Rome still exists today through its nickname of \"The City of Seven Hills\" (a phrase commonly associated with Rome) and the town twinning program of Sister Cities International.\n\nCincinnati was chartered as a town on January 1, 1802.  It was chartered as a city by an act of the General Assembly that passed February 5, 1819, and took effect on March 1 of that year. The introduction of steam navigation on the Ohio River in 1811 and the completion of the Miami and Erie Canal helped the city grow to 115,000 citizens by 1850. Cincinnati was an important stop on the Underground Railroad, which helped slaves escape from the South.\n\nCincinnati was the site of many historical beginnings. In 1850 it was the first city in the United States to establish a Jewish Hospital. It is where America\'s first municipal fire department, the Cincinnati Fire Department, was established in 1853. Cincinnati was the first municipality to build and own a major railroad in 1880. In 1902, the world\'s first re-inforced concrete skyscraper was built, the Ingalls Building.\n\nDuring the first forty years after its founding, Cincinnati experienced spectacular growth. By 1820, citizens, extremely proud of their city, were referring to it as The Queen City or The Queen of the West.</string>
 
@@ -26,4 +28,8 @@
 
     <string name="history_header_disasters">Disasters</string>
     <string name="history_disasters">On December 3, 1979 11 persons were killed in a crowd crush at the entrance of Riverfront Coliseum for a rock concert by the British band The Who.\n\nCincinnati has experienced multiple floods in its history. The largest being the Ohio River flood of 1937 where Cincinnati measured flood waters at 80 feet.\n\nOhio was just one of many states that suffered from the third deadliest tornado swarm in the United States, which consisted of 47 tornados in less than 12 hours known as the 1965 Palm Sunday Tornado Outbreak.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

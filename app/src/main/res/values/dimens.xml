@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="menu_header_height">160dp</dimen>
+    <dimen name="activity_hero_image_height">160dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="grid_image_height">130dp</dimen>
@@ -10,9 +11,11 @@
     <dimen name="details_fragment_list_item_height">130dp</dimen>
     <dimen name="activities_card_image_height">160dp</dimen>
     <dimen name="base_padding">16dp</dimen>
+    <dimen name="large_padding">24dp</dimen>
     <dimen name="medium_padding">8dp</dimen>
     <dimen name="small_padding">4dp</dimen>
     <dimen name="base_margin">16dp</dimen>
+    <dimen name="large_margin">24dp</dimen>
     <dimen name="medium_margin">8dp</dimen>
     <dimen name="small_margin">4dp</dimen>
     <dimen name="subcategory_grid_item">150dp</dimen>
@@ -23,4 +26,8 @@
     <dimen name="cardCornerRadius">1dp</dimen>
     <dimen name="cardElevation">2dp</dimen>
     <dimen name="cardMaxElevation">4dp</dimen>
+    <dimen name="base_text_size">14sp</dimen>
+    <dimen name="header_text_size">18sp</dimen>
+    <dimen name="expandableListChildPadding">36dp</dimen>
+    <dimen name="expandableListItemHeight">48dp</dimen>
 </resources>

@@ -5,44 +5,53 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/colorAppBackground</item>
     </style>
 
-    <style name="MainCategoryText" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textSize">14dp</item>
-        <item name="colorPrimary">@color/darkGray</item>
+    <style name="MainCategoryText" parent="@style/AppTheme">
+        <item name="android:textSize">@dimen/base_text_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:padding">@dimen/medium_padding</item>
     </style>
 
-    <style name="DescriptionHeaders" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textSize">14dp</item>
-        <item name="colorPrimary">@color/darkGray</item>
+    <style name="DescriptionHeaders" parent="@style/AppTheme">
+        <item name="android:textSize">@dimen/base_text_size</item>
+        <item name="android:textColor">@color/colorDescriptionHeaders</item>
     </style>
 
-    <style name="CardHeaders" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textSize">18dp</item>
-        <item name="colorPrimary">@color/colorCardHeaders</item>
+    <style name="HistoryHeaders" parent="@style/AppTheme">
+        <item name="android:textSize">@dimen/header_text_size</item>
+        <item name="android:textColor">@color/colorDescriptionHeaders</item>
     </style>
 
-    <style name="CardDescriptions" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textSize">14dp</item>
-        <item name="colorPrimary">@color/darkGray</item>
+    <style name="HistoryText" parent="@style/AppTheme">
+        <item name="android:textSize">@dimen/base_text_size</item>
+        <item name="android:paddingLeft">@dimen/expandableListChildPadding</item>
+        <item name="android:textColor">@color/colorDescriptionText</item>
     </style>
 
-    <style name="SeeMore" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textSize">14dp</item>
-        <item name="colorPrimary">@color/colorPrimaryDark</item>
+    <style name="CardHeaders" parent="@style/AppTheme">
+        <item name="android:textSize">@dimen/header_text_size</item>
+        <item name="android:textColor">@color/colorCardHeaders</item>
     </style>
 
-    <style name="PrimaryFlatButton" parent="Theme.AppCompat.Light">
+    <style name="CardDescriptions" parent="@style/AppTheme">
+        <item name="android:textSize">@dimen/base_text_size</item>
+        <item name="android:textColor">@color/darkGray</item>
+    </style>
+
+    <style name="SeeMore" parent="@style/AppTheme">
+        <item name="android:textSize">@dimen/base_text_size</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="PrimaryFlatButton" parent="@style/AppTheme">
         <item name="android:buttonStyle">
             @style/Widget.AppCompat.Button.Borderless.Colored
         </item>
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

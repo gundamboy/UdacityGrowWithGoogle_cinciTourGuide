@@ -1,15 +1,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/location_details_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
     <LinearLayout
         android:id="@+id/detailsLayout"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:context="com.wickedsword.retar.cincitourguide.CityLocationDetailsFragment">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/city_activity_image"
@@ -150,4 +149,5 @@
             android:autoLink="web" />
 
     </LinearLayout>
+
 </ScrollView>

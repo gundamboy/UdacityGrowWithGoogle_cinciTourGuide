@@ -3,24 +3,27 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     android:padding="@dimen/base_padding">
 
-    <fragment
-        android:id="@+id/activities_list_fragment"
-        android:layout_weight="2"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.wickedsword.retar.cincitourguide.CityLocationActivitiesFragment"
-        />
+        android:orientation="horizontal">
 
-    <FrameLayout
-        android:id="@+id/details"
-        android:layout_weight="3"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        />
+        <fragment
+            android:id="@+id/activities_list_fragment"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            class="com.wickedsword.retar.cincitourguide.CityLocationActivitiesFragment" />
 
+        <FrameLayout
+            android:id="@+id/details"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
     <include layout="@layout/navigation_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

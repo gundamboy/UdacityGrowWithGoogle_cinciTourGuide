@@ -2,10 +2,14 @@
 <resources>
     <color name="colorPrimary">#795548</color>
     <color name="colorPrimaryDark">#5d4037</color>
+    <color name="colorAppBackground">#d8c5a7</color>
     <color name="white">#ffffff</color>
     <color name="darkGray">#6c6c6c</color>
-    <color name="colorDescriptionHeaders">#000000</color>
+    <color name="colorSubcategoryLabelBackground">#795548</color>
+    <color name="colorDescriptionHeaders">#262626</color>
     <color name="colorCardHeaders">#262626</color>
-    <color name="colorCardBackground">#FFFFFF</color>
+    <color name="colorCardBackground">#f6f1e9</color>
     <color name="colorCardText">#414141</color>
+    <color name="colorDescriptionText">#414141</color>
+    <color name="colorTextShadow">#000000</color>
 </resources>
