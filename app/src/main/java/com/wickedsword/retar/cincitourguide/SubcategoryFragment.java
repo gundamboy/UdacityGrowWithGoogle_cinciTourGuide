@@ -1,6 +1,8 @@
 package com.wickedsword.retar.cincitourguide;
 
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +30,6 @@ import java.util.ArrayList;
 public class SubcategoryFragment extends Fragment {
     // some constants and variables
     private static final String PARENT_CATEGORY_NAME = "parent_category";
-    private static final String SUBCATEGORY_ID = "category_id";
     private String parentCategory;
 
     public SubcategoryFragment() {
@@ -47,15 +48,10 @@ public class SubcategoryFragment extends Fragment {
         // make an array to hold the categories in
         final ArrayList<Subcategory> categories = new ArrayList<Subcategory>();
 
-        // Check whether we're recreating a previously destroyed instance
-        if (savedInstanceState != null) {
-            parentCategory = savedInstanceState.getString(PARENT_CATEGORY_NAME);
-        } else {
-            Bundle args = getArguments();
+        Bundle args = getArguments();
 
-            if (args != null) {
-                parentCategory = args.getString(PARENT_CATEGORY_NAME);
-            }
+        if (args != null) {
+            parentCategory = args.getString(PARENT_CATEGORY_NAME);
         }
 
         // holds the json string
@@ -100,29 +96,6 @@ public class SubcategoryFragment extends Fragment {
         SubcategoryAdapter adapter = new SubcategoryAdapter(getActivity(), categories);
         subcategoryGrid.setAdapter(adapter);
 
-        subcategoryGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-                Subcategory currentCategory = categories.get(i);
-
-                Intent activitiesIntent = new Intent(getActivity(), CityLocationActivitiesActivity.class);
-
-                // pass the subcategory ID to the next Activity so we can get its activities from the json
-                activitiesIntent.putExtra(SUBCATEGORY_ID, currentCategory.getCategoryId());
-                activitiesIntent.putExtra(PARENT_CATEGORY_NAME, currentCategory.getParentCategoryName());
-
-                // start the activity
-                getActivity().startActivity(activitiesIntent);
-
-            }
-        });
-
         return view;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(PARENT_CATEGORY_NAME, parentCategory);
     }
 }

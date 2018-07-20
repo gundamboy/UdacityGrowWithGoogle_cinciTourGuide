@@ -56,7 +56,13 @@ public class MainActivityFragment extends Fragment {
         landmarks.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
+                 CityLocationActivitiesFragment frag = new CityLocationActivitiesFragment();
 
+                 Bundle fragBundle = new Bundle();
+                 fragBundle.putString(PARENT_CATEGORY_NAME, LANDMARKS);
+                 fragBundle.putInt(SUBCATEGORY_ID, 1);
+                 frag.setArguments(fragBundle);
+                 replaceFragment(frag, R.id.main_fragment);
              }
          });
 
@@ -70,7 +76,6 @@ public class MainActivityFragment extends Fragment {
                 Bundle fragBundle = new Bundle();
                 fragBundle.putString(PARENT_CATEGORY_NAME, FOOD_CATEGORY);
                 frag.setArguments(fragBundle);
-                frag.setArguments(fragBundle);
 
                 replaceFragment(frag, R.id.main_fragment);
             }
@@ -80,7 +85,8 @@ public class MainActivityFragment extends Fragment {
         city_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // start the city history fragment call
+                CityHistoryFragment frag = new CityHistoryFragment();
+                replaceFragment(frag, R.id.main_fragment);
             }
         });
 

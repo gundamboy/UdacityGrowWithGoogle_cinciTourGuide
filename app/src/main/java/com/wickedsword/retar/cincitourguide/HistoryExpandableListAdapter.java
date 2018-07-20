@@ -19,6 +19,7 @@ public class HistoryExpandableListAdapter extends BaseExpandableListAdapter  {
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listHashMap;
 
+    // adapter constructor
     public HistoryExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
         this.context = context;
         this.listDataHeader = listDataHeader;
@@ -62,6 +63,8 @@ public class HistoryExpandableListAdapter extends BaseExpandableListAdapter  {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        // This sets the list section header
+
         View view = convertView;
         String historyHeader = (String)getGroup(groupPosition);
         if(view == null) {
@@ -77,6 +80,8 @@ public class HistoryExpandableListAdapter extends BaseExpandableListAdapter  {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        // this sets the text of the list section
+
         View view = convertView;
         final String childText = (String) getChild(groupPosition, childPosition);
 

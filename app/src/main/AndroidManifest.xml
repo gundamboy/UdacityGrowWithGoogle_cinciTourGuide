@@ -8,42 +8,17 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/app_icon_round"
         android:supportsRtl="true"
-        android:configChanges="keyboardHidden|orientation"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".CityLocationActivitiesActivity"
-            android:label="@string/main_category_things_to_do"
-            android:parentActivityName=".MainActivity">
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
-        </activity>
-        <activity
-            android:name=".CityDetailsActivity"
-            android:label="@string/main_category_things_to_do"
-            android:parentActivityName=".CityLocationActivitiesActivity">
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
-        </activity>
-        <activity
-            android:name=".CityHistoryActivity"
-            android:label="@string/main_category_city_history"
-            android:parentActivityName=".MainActivity">
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
-        </activity>
+        <activity android:name=".MainActivity" />
+
     </application>
 
 </manifest>

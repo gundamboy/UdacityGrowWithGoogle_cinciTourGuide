@@ -18,21 +18,12 @@
         android:id="@+id/category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity = "center|start|start"
+        android:gravity = "center_horizontal"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@android:color/white"
         android:layout_marginTop="@dimen/large_margin"
-        android:paddingTop="@dimen/small_padding"
-        android:paddingLeft="@dimen/medium_padding"
-        android:paddingStart="@dimen/medium_padding"
-        android:paddingBottom="@dimen/small_padding"
-        android:paddingRight="@dimen/large_padding"
-        android:paddingEnd="@dimen/large_padding"
+        android:padding="@dimen/medium_padding"
         android:background="@drawable/rounded_rectangle"
-        android:shadowColor="@color/colorTextShadow"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="40"
         android:text="Coney Island"/>
 
 </RelativeLayout>

@@ -1,7 +1,11 @@
 package com.wickedsword.retar.cincitourguide;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +18,11 @@ import java.util.ArrayList;
 public class SubcategoryAdapter extends ArrayAdapter<Subcategory> {
     private static final String SUBCATEGORY_ID = "category_id";
     private static final String PARENT_CATEGORY_NAME = "parent_category";
+    private Context context;
 
     public SubcategoryAdapter(Activity context, ArrayList<Subcategory> categories) {
         super(context, 0, categories);
+        this.context = context;
     }
 
     @Override
@@ -38,25 +44,35 @@ public class SubcategoryAdapter extends ArrayAdapter<Subcategory> {
         TextView categoryName = gridView.findViewById(R.id.category_name);
         categoryName.setText(currentCategory.getCategoryName());
 
-        //set an setOnClickListener for each gird item to go to the CityLocationActivitiesActivity activity. that's a whole of activities!
-        /*
+        //set an setOnClickListener for each gird item
         gridView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // set up the intent
-                Intent activitiesIntent = new Intent(getContext(), CityLocationActivitiesActivity.class);
+                CityLocationActivitiesFragment frag = new CityLocationActivitiesFragment();
+                // create a bundle to pass some needed info the next fragment
+                Bundle fragBundle = new Bundle();
+                fragBundle.putInt(SUBCATEGORY_ID, currentCategory.getCategoryId());
+                fragBundle.putString(PARENT_CATEGORY_NAME, currentCategory.getParentCategoryName());
+                frag.setArguments(fragBundle);
 
-                // pass the subcategory ID to the next Activity so we can get its activities from the json
-                activitiesIntent.putExtra(SUBCATEGORY_ID, currentCategory.getCategoryId());
-                activitiesIntent.putExtra(PARENT_CATEGORY_NAME, currentCategory.getParentCategoryName());
-
-                // start the activity
-                getContext().startActivity(activitiesIntent);
+                replaceFragment(frag, R.id.main_fragment);
             }
         });
-        */
 
         return gridView;
+    }
+
+    private void replaceFragment(Fragment frag, int viewId) {
+
+        // get the fragment manager
+        FragmentManager fm = ((Activity) context).getFragmentManager();
+
+        // Execute a transaction, replacing any existing fragment
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(viewId, frag);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
 }

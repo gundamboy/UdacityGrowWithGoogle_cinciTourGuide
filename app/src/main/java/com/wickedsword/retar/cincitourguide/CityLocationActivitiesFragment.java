@@ -40,7 +40,6 @@ public class CityLocationActivitiesFragment extends ListFragment {
     private static final String RATES = "rates";
     private static final String HOURS = "house";
 
-    boolean mDualPane;
     int mCurCheckPosition = 0;
 
     // we need to pass some stuff to this details fragment to get the right info
@@ -59,22 +58,17 @@ public class CityLocationActivitiesFragment extends ListFragment {
     private String activityRates;
     private String activityHours;
 
-    // this method listens for the onBackPressed() method.
-    // if that was used, and the results came back ok,
-    // set the variables to use the data from that intent
-    // otherwise, the extras bundle will be null and the app will crash.
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.v("CityLocActivityActFrag", "onActivityCreated");
 
-        Bundle extras = getActivity().getIntent().getExtras();
+        // get the bundle that was sent from the previous fragment
+        Bundle extras = getArguments();
 
-        if(extras != null) {
-            // get the extras
-            subcategoryId = extras.getInt(SUBCATEGORY_ID);
+        // check to see if the bundle came back empty. if it did there will be some problems.
+        if (extras != null) {
             parentCategoryName = extras.getString(PARENT_CATEGORY_NAME);
+            subcategoryId = extras.getInt(SUBCATEGORY_ID);
         }
 
         // generate the locations ArrayList
@@ -83,23 +77,6 @@ public class CityLocationActivitiesFragment extends ListFragment {
         // setup the adapter with the list
         adapterSetup(locations);
 
-        // Check to see if we have a frame in which to embed the details
-        // fragment directly in the containing UI
-        View detailsFrame = getActivity().findViewById(R.id.details);
-        mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
-
-        if (savedInstanceState != null) {
-            // Restore last state for checked position.
-            mCurCheckPosition = savedInstanceState.getInt(CURRENT_CHOICE, 0);
-        }
-
-        if (mDualPane) {
-            // In dual-pane mode, the list view highlights the selected item.
-            getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-            // Make sure our UI is in the correct state.
-            showDetails(mCurCheckPosition);
-        }
     }
 
     @Override
@@ -108,13 +85,14 @@ public class CityLocationActivitiesFragment extends ListFragment {
     }
 
     /**
-     * Helper function to show the details of a selected item, either by
-     * displaying a fragment in-place in the current UI, or starting a
-     * whole new activity in which it is displayed.
+     * this method is called when an activity card is pressed. it pulls in the next fragment
+     * with the proper information
+     * @param index this is the ID of the clicked item
      */
     void showDetails(int index) {
         mCurCheckPosition = index;
 
+        // grab the data we need
         activityId = locations.get(mCurCheckPosition).getmActivityId();
         imageResourceId = locations.get(mCurCheckPosition).getmActivityImageId();
         activityName = locations.get(mCurCheckPosition).getmActivityName();
@@ -125,71 +103,47 @@ public class CityLocationActivitiesFragment extends ListFragment {
         activityRates = locations.get(mCurCheckPosition).getmActivityRates();
         activityHours = locations.get(mCurCheckPosition).getmActivityHours();
 
-        if (mDualPane) {
-            // We can display everything in-place with fragments, so update
-            // the list to highlight the selected item and show the data.
-            getListView().setItemChecked(mCurCheckPosition, true);
+        // initialize a new fragment
+        CityLocationDetailsFragment details = CityLocationDetailsFragment.newInstance(mCurCheckPosition);
 
-            // Check what fragment is currently shown, replace if needed.
-            CityLocationDetailsFragment details = (CityLocationDetailsFragment) getFragmentManager().findFragmentById(R.id.details);
+        // get the fragment manager
+        FragmentManager fm = getFragmentManager();
 
-            if (details == null || details.getShownIndex() != mCurCheckPosition) {
-                // Make new fragment to show this selection.
-                details = CityLocationDetailsFragment.newInstance(mCurCheckPosition);
+        // make a new bundle of data to pass to the next fragment
+        Bundle fragBundle = new Bundle();
+        fragBundle.putInt(SUBCATEGORY_ID, subcategoryId);
+        fragBundle.putString(PARENT_CATEGORY_NAME, parentCategoryName);
+        fragBundle.putInt(CURRENT_CHOICE, mCurCheckPosition);
+        fragBundle.putInt(INDEX, mCurCheckPosition);
+        fragBundle.putInt(ACTIVITY_ID, activityId);
+        fragBundle.putInt(IMAGE_RESOURCE_ID, imageResourceId);
+        fragBundle.putString(ACTIVITY_NAME, activityName);
+        fragBundle.putString(ACTIVITY_IMAGE, activityImage);
+        fragBundle.putString(DESCRIPTION, activityDescription);
+        fragBundle.putString(WEBSITE, activityWebsite);
+        fragBundle.putString(PHONE, activityPhoneNumber);
+        fragBundle.putString(ADDRESS, activityAddressMapsQuery);
+        fragBundle.putString(RATES, activityRates);
+        fragBundle.putString(HOURS, activityHours);
+        details.setArguments(fragBundle);
 
-                FragmentManager fm = getFragmentManager();
-
-                Bundle fragBundle = new Bundle();
-                fragBundle.putInt(SUBCATEGORY_ID, subcategoryId);
-                fragBundle.putString(PARENT_CATEGORY_NAME, parentCategoryName);
-                fragBundle.putInt(CURRENT_CHOICE, mCurCheckPosition);
-                fragBundle.putInt(INDEX, mCurCheckPosition);
-                fragBundle.putInt(ACTIVITY_ID, activityId);
-                fragBundle.putInt(IMAGE_RESOURCE_ID, imageResourceId);
-                fragBundle.putString(ACTIVITY_NAME, activityName);
-                fragBundle.putString(ACTIVITY_IMAGE, activityImage);
-                fragBundle.putString(DESCRIPTION, activityDescription);
-                fragBundle.putString(WEBSITE, activityWebsite);
-                fragBundle.putString(PHONE, activityPhoneNumber);
-                fragBundle.putString(ADDRESS, activityAddressMapsQuery);
-                fragBundle.putString(RATES, activityRates);
-                fragBundle.putString(HOURS, activityHours);
-                details.setArguments(fragBundle);
-
-                // Execute a transaction, replacing any existing fragment
-                // with this one inside the frame.
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.details, details);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.commit();
-            }
-        } else {
-            // Otherwise we need to launch a new activity to display
-            // the dialog fragment with selected text.
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), CityDetailsActivity.class);
-            intent.putExtra(INDEX, index);
-            intent.putExtra(PARENT_CATEGORY_NAME, parentCategoryName);
-            intent.putExtra(SUBCATEGORY_ID, subcategoryId);
-            intent.putExtra(CURRENT_CHOICE, mCurCheckPosition);
-            intent.putExtra(ACTIVITY_ID, activityId);
-            intent.putExtra(IMAGE_RESOURCE_ID, imageResourceId);
-            intent.putExtra(ACTIVITY_NAME, activityName);
-            intent.putExtra(ACTIVITY_IMAGE, activityImage);
-            intent.putExtra(DESCRIPTION, activityDescription);
-            intent.putExtra(WEBSITE, activityWebsite);
-            intent.putExtra(PHONE, activityPhoneNumber);
-            intent.putExtra(ADDRESS, activityAddressMapsQuery);
-            intent.putExtra(RATES, activityRates);
-            intent.putExtra(HOURS, activityHours);
-            startActivity(intent);
-        }
+        // Execute a transaction, replacing any existing fragment
+        // with this one inside the frame.
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.main_fragment, details);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
     }
 
     public CityLocationActivitiesFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * this method builds the custom array adapter
+     * @param subcategoryId the subcategory id that we need to find in the json file
+     * @return
+     */
     private ArrayList<CityLocation> buildLocationList(int subcategoryId) {
 
         // holds the json string
@@ -218,10 +172,16 @@ public class CityLocationActivitiesFragment extends ListFragment {
                 JSONObject inner_array = category_jArray.getJSONObject(i);
                 int current_category_id = inner_array.getInt("category_id");
 
+                // looks to see if the current id and the subcategory id match
                 if(current_category_id == subcategoryId) {
+                    // get the category_activities string
                     String activitiesString = inner_array.getString("category_activities");
+
+                    // turn the string info a jsonarray
                     JSONArray locationActivities = new JSONArray(activitiesString);
 
+                    // we have to do another loop on the new array so we can get the proper
+                    // data back to be used in a bundle for the next activity
                     for (int j = 0; j < locationActivities.length(); j++) {
                         JSONObject inner_activity = locationActivities.getJSONObject(j);
 
@@ -256,6 +216,10 @@ public class CityLocationActivitiesFragment extends ListFragment {
         return locations;
     }
 
+    /**
+     * helper method to set up the arraylist adapter
+     * @param locations the arrayList of location data
+     */
     private void adapterSetup(ArrayList<CityLocation> locations) {
         // set up the adapter
         CityActivityListAdapter adapter = new CityActivityListAdapter(getActivity(), locations);

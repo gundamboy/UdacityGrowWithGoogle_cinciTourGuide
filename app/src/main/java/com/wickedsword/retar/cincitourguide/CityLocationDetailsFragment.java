@@ -47,28 +47,13 @@ public class CityLocationDetailsFragment extends Fragment {
         return f;
     }
 
-    public int getShownIndex() {
-        return getArguments().getInt(INDEX);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view;
+        // inflate the view
+        View view = inflater.inflate(R.layout.fragment_city_location_details, container, false);
 
-        if (container == null) {
-            // We have different layouts, and in one of them this
-            // fragment's containing frame doesn't exist. The fragment
-            // may still be created from its saved state, but there is
-            // no reason to try to create its view hierarchy because it
-            // isn't displayed. Note this isn't needed -- we could just
-            // run the code below, where we would create and return the
-            // view hierarchy; it would just never be used.
-            return null;
-        }
-
-        view = inflater.inflate(R.layout.fragment_city_location_details, container, false);
-
+        // get the bundle of data from the previous fragment
         if (getArguments() != null) {
             String activityName = getArguments().getString(ACTIVITY_NAME);
             int imageResourceId = getArguments().getInt(IMAGE_RESOURCE_ID);
@@ -79,12 +64,15 @@ public class CityLocationDetailsFragment extends Fragment {
             String rates = getArguments().getString(RATES);
             String hours = getArguments().getString(HOURS);
 
+            // set the image
             ImageView activityImage = view.findViewById(R.id.city_activity_image);
             activityImage.setImageResource(imageResourceId);
 
+            // set the name
             TextView activity_name = view.findViewById(R.id.activity_name);
             activity_name.setText(activityName);
 
+            // set the address. if there wasnt an address, dont show the address view
             TextView activity_address = view.findViewById(R.id.address);
             ImageView locationIcon = view.findViewById(R.id.location_icon);
             if(address == null || address.isEmpty()) {
@@ -94,6 +82,7 @@ public class CityLocationDetailsFragment extends Fragment {
                 activity_address.setText(address);
             }
 
+            // set the phone. if there wasnt a phone, dont show the phone view
             TextView activity_phone = view.findViewById(R.id.phone);
             ImageView phoneIcon = view.findViewById(R.id.phone_icon);
             if(phone == null || phone.isEmpty()) {
@@ -103,6 +92,7 @@ public class CityLocationDetailsFragment extends Fragment {
                 activity_phone.setText(phone);
             }
 
+            // set the website. if there wasnt a website, dont show the website view
             TextView activity_website = view.findViewById(R.id.website);
             ImageView websiteIcon = view.findViewById(R.id.web_icon);
             if(website == null || website.isEmpty()) {
@@ -112,9 +102,11 @@ public class CityLocationDetailsFragment extends Fragment {
                 activity_website.setText(website);
             }
 
+            // set the description
             TextView activity_description = view.findViewById(R.id.description);
             activity_description.setText(description);
 
+            // set the rates. if there wasnt any rates, dont show the rates view
             TextView activity_rates = view.findViewById(R.id.rates);
             TextView rates_header = view.findViewById(R.id.rates_header);
             if(rates == null || rates.isEmpty()) {
@@ -123,7 +115,7 @@ public class CityLocationDetailsFragment extends Fragment {
             } else {
                 activity_rates.setText(rates);
             }
-
+            // set the hours. if there wasnt any hours, dont show the hours view
             TextView activity_hours = view.findViewById(R.id.hours);
             TextView hours_header = view.findViewById(R.id.hours_header);
             if(hours == null || hours.isEmpty()) {
@@ -133,7 +125,7 @@ public class CityLocationDetailsFragment extends Fragment {
                 activity_hours.setText(hours);
             }
 
-            // set up click listeners for implicit intents for phone and maps
+            // set up click listener to open the phone application
             activity_phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -144,6 +136,7 @@ public class CityLocationDetailsFragment extends Fragment {
                 }
             });
 
+            // set up a click listener for the address to open in maps
             activity_address.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

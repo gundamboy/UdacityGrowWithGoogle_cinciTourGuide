@@ -5,7 +5,7 @@
     <color name="colorAppBackground">#d8c5a7</color>
     <color name="white">#ffffff</color>
     <color name="darkGray">#6c6c6c</color>
-    <color name="colorSubcategoryLabelBackground">#795548</color>
+    <color name="colorSubcategoryLabelBackground">#f2795548</color>
     <color name="colorDescriptionHeaders">#262626</color>
     <color name="colorCardHeaders">#262626</color>
     <color name="colorCardBackground">#f6f1e9</color>

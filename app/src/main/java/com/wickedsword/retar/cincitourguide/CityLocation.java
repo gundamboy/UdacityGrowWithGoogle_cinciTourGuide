@@ -16,6 +16,7 @@ public class CityLocation {
     private String mActivityRates;
     private String mActivityHours;
 
+    // constructor
     public CityLocation(int mActivityId, String mActivityName, int mActivityImageId, String mActivityTeaserText, String mActivityDescription, String mActivityWebsite, String mActivityPhoneNumber, String mActivityStreet, String mActivityCityStateZip, String mActivityDirectionsString, String mActivityRates, String mActivityHours) {
         this.mActivityId = mActivityId;
         this.mActivityName = mActivityName;
@@ -31,6 +32,7 @@ public class CityLocation {
         this.mActivityHours = mActivityHours;
     }
 
+    // getters
     public int getmActivityId() {
         return mActivityId;
     }

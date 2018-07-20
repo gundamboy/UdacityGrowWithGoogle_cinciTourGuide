@@ -1,40 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/history_hero_image"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_hero_image_height"
+        android:layout_marginBottom="@dimen/base_margin"
+        android:scaleType="centerCrop"
+        android:src="@drawable/history_daguerreotype_view_of_cincinnati_sept_1848" />
+
+    <ExpandableListView
+        android:id="@+id/historyList"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/base_padding"
+        android:paddingRight="@dimen/base_padding"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+        android:divider="@drawable/custom_divider"
+        android:childDivider="#00000000"
+        android:dividerHeight="0.5dp" />
 
-        <ImageView
-            android:id="@+id/history_hero_image"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/activity_hero_image_height"
-            android:layout_marginBottom="@dimen/base_margin"
-            android:scaleType="centerCrop"
-            android:src="@drawable/history_daguerreotype_view_of_cincinnati_sept_1848" />
-
-        <ExpandableListView
-            android:id="@+id/historyList"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:paddingLeft="@dimen/base_padding"
-            android:paddingRight="@dimen/base_padding"
-            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-            android:divider="@drawable/custom_divider"
-            android:childDivider="#00000000"
-            android:dividerHeight="0.5dp" />
-
-    </LinearLayout>
-
-    <include layout="@layout/navigation_drawer" />
-
-</android.support.v4.widget.DrawerLayout>
+</LinearLayout>
