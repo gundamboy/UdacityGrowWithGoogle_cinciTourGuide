@@ -46,7 +46,7 @@ public class SubcategoryFragment extends Fragment {
         GridView subcategoryGrid = view.findViewById(R.id.subcategory_gridview);
 
         // make an array to hold the categories in
-        final ArrayList<Subcategory> categories = new ArrayList<Subcategory>();
+        final ArrayList<Subcategory> categories = new ArrayList<>();
 
         Bundle args = getArguments();
 

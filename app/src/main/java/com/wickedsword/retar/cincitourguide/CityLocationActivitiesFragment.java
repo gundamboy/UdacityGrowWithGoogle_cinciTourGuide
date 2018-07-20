@@ -132,6 +132,7 @@ public class CityLocationActivitiesFragment extends ListFragment {
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.main_fragment, details);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null);
         ft.commit();
     }
 

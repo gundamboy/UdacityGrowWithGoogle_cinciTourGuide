@@ -136,6 +136,16 @@ public class CityLocationDetailsFragment extends Fragment {
                 }
             });
 
+            // set up click listener to open the website
+            activity_website.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent webIntent = new Intent(Intent.ACTION_VIEW);
+                    webIntent.setData(Uri.parse(getArguments().getString(WEBSITE)));
+                    startActivity(webIntent);
+                }
+            });
+
             // set up a click listener for the address to open in maps
             activity_address.setOnClickListener(new View.OnClickListener() {
                 @Override
